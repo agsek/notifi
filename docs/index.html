@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Notification sample</title>
+        <script>
+
+            // request permission on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                if (!Notification) {
+                    alert('Desktop notifications not available in your browser.');
+                }
+
+                if (Notification.permission !== 'granted') {
+                    Notification.requestPermission();
+                }
+            });
+
+            function notifyMe() {
+                if (Notification.permission === 'denied') {
+                    return;
+                }
+                var notification = new Notification('Notification title', {
+                    icon: 'https://media.giphy.com/media/nNxT5qXR02FOM/giphy.gif?response_id=591dfaf668886003c2c7cf23',
+                    body: 'Hey there! You\'ve been notified!'
+                });
+
+                notification.onclick = function() {
+                    window.open('http://stackoverflow.com/a/13328397/1269037');
+                };
+            }
+        </script>
+        <style>
+            button {
+                height: 3rem;
+                font-size: 2rem;
+                border: none;
+                background-color: coral;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="notifyMe()">Notify me!</button>
+    </body>
+    <footer>
+
+    </footer>
+</html>
